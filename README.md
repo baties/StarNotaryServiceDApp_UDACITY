@@ -5,6 +5,17 @@
 This Starter Code has already implemented the functionalities you implemented in the StarNotary (Version 2) exercise, and have comments in all the files you need to implement your tasks.
 
 
+### ERC721 TOKEN NAME & SYMBOL :
+1. **Token Name**   : "BatisSNToken" 
+2. **Token Symbol** : "BSNT" 
+ 
+### SOFTWARE VERSION USED :
+1. **Truffle Version**      : "v5.4.3 (core: 5.4.3)" 
+2. **Solidity Version**     : "v0.5.16 (solc-js)" 
+3. **Node Version**         : "v14.17.4" 
+4. **Web3 Version**         : "v1.5.0" 
+5. **OpenZeppelin Version** : "2.3" 
+
 
 ### Dependencies
 For this project, you will need to have:

@@ -14,6 +14,8 @@ contract StarNotary is ERC721 {
     // Implement Task 1 Add a name and symbol properties
     // name: Is a short name to your token
     // symbol: Is a short string like 'USD' -> 'American Dollar'
+    string public constant name = "BatisSNToken";
+    string public constant symbol = "BSNT";
     
 
     // mapping the Star with the Owner Address
@@ -57,6 +59,8 @@ contract StarNotary is ERC721 {
     // Implement Task 1 lookUptokenIdToStarInfo
     function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
         //1. You should return the Star saved in tokenIdToStarInfo mapping
+        Star memory myStar = tokenIdToStarInfo[_tokenId] ;
+        return myStar.name ;
     }
 
     // Implement Task 1 Exchange Stars function
@@ -65,12 +69,31 @@ contract StarNotary is ERC721 {
         //2. You don't have to check for the price of the token (star)
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId1)
         //4. Use _transferFrom function to exchange the tokens.
+        address _tokenId1Owner = ownerOf((_tokenId1)) ;
+        address _tokenId2Owner = ownerOf((_tokenId2)) ;
+        if (_tokenId1Owner == msg.sender){
+            _transferFrom(_tokenId1Owner, _tokenId2Owner, _tokenId1) ;            
+            _transferFrom(_tokenId2Owner, _tokenId1Owner, _tokenId2) ;            
+        }
+        else{
+            if (_tokenId2Owner == msg.sender){
+                _transferFrom(_tokenId2Owner, _tokenId1Owner, _tokenId1) ;            
+                _transferFrom(_tokenId1Owner, _tokenId2Owner, _tokenId2) ;            
+            }
+            else{
+                revert("Sender is not the Owner of these Tokens !!") ;
+            }
+        }
+
+
     }
 
     // Implement Task 1 Transfer Stars
     function transferStar(address _to1, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
         //2. Use the transferFrom(from, to, tokenId); function to transfer the Star
+        require( msg.sender == ownerOf(_tokenId) ) ;
+        _transferFrom( msg.sender, _to1, _tokenId ) ;
     }
 
 }
